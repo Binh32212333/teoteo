@@ -41,4 +41,4 @@ echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""
 
-streamlit run app.py
+streamlit run streamlit_app.py

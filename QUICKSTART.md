@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ### 2. Start the Web UI
 
 ```bash
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
 The application will automatically open in your browser at `http://localhost:8501`
@@ -130,7 +130,7 @@ Go to **📊 Statistics** page to see:
 pip install streamlit
 
 # Try running with full path
-python -m streamlit run app.py
+python -m streamlit run streamlit_app.py
 ```
 
 ### AWS Connection Failed
@@ -192,7 +192,7 @@ Here's a complete workflow from start to finish:
 
 ```bash
 # 1. Start the web UI
-streamlit run app.py
+streamlit run streamlit_app.py
 
 # 2. Configure AWS in Settings page
 

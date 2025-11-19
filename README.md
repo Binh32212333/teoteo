@@ -146,7 +146,7 @@ These launcher scripts automatically:
 **Manual Start:**
 
 ```bash
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
 The application will open in your browser at `http://localhost:8501`
@@ -327,7 +327,7 @@ The system uses OpenAI's CLIP model to understand image content:
 
 ```
 teoteo/
-├── app.py                  # Streamlit web UI entry point
+├── streamlit_app.py                  # Streamlit web UI entry point
 ├── main.py                 # CLI entry point
 ├── config.py              # Configuration management
 ├── image_downloader.py    # Download images from URLs

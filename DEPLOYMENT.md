@@ -13,7 +13,7 @@ Your code is already on GitHub - ready to deploy! ✅
 4. Fill in the form:
    - **Repository**: `Binh32212333/teoteo`
    - **Branch**: `claude/continue-work-017CHbS5U6dANLYAFoyN6Bkh`
-   - **Main file path**: `app.py`
+   - **Main file path**: `streamlit_app.py`
 
 5. Click "Advanced settings"
 6. Add your secrets (copy from `.streamlit/secrets.toml.example`):
@@ -94,7 +94,7 @@ Type=simple
 User=$USER
 WorkingDirectory=$HOME/teoteo
 Environment="PATH=$HOME/teoteo/venv/bin"
-ExecStart=$HOME/teoteo/venv/bin/streamlit run app.py --server.port=8501 --server.address=localhost
+ExecStart=$HOME/teoteo/venv/bin/streamlit run streamlit_app.py --server.port=8501 --server.address=localhost
 Restart=always
 
 [Install]
@@ -151,7 +151,7 @@ sudo certbot --nginx -d your-domain.com
 
 Create `Procfile`:
 ```
-web: sh setup.sh && streamlit run app.py
+web: sh setup.sh && streamlit run streamlit_app.py
 ```
 
 Create `setup.sh`:
