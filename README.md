@@ -127,6 +127,24 @@ The easiest way to use the system is through the web-based user interface:
 
 #### Starting the Web UI
 
+**Quick Start (Recommended):**
+
+```bash
+# Linux/Mac
+./run.sh
+
+# Windows
+run.bat
+```
+
+These launcher scripts automatically:
+- Create virtual environment if needed
+- Install dependencies
+- Create .env file from template
+- Start the web UI
+
+**Manual Start:**
+
 ```bash
 streamlit run app.py
 ```
