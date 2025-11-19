@@ -4,6 +4,7 @@ A comprehensive Python-based system that automatically downloads, filters, analy
 
 ## Features
 
+### Core Functionality
 - **Automated Image Download**: Download images from URLs provided in a CSV file
 - **Intelligent Filtering**: Use OCR (EasyOCR or Tesseract) to detect and filter out images containing phone numbers or websites
 - **AI-Powered Recognition**: Automatically categorize and tag images using CLIP (Contrastive Language-Image Pre-training)
@@ -11,6 +12,12 @@ A comprehensive Python-based system that automatically downloads, filters, analy
 - **Metadata Management**: Track all images with comprehensive metadata including tags, categories, and usage
 - **SEO Post Enhancement**: Automatically analyze text-based SEO posts and insert relevant images
 - **Content Matching**: Use semantic similarity to match images with post content for maximum relevance
+
+### User Interfaces
+- **🌐 Web UI**: User-friendly web interface built with Streamlit (recommended for most users)
+- **💻 CLI**: Command-line interface for automation and advanced users
+- **📊 Analytics Dashboard**: Visual statistics and insights about your image database
+- **🔍 Interactive Search**: Browse and search images with multiple filters
 
 ## System Architecture
 
@@ -112,7 +119,67 @@ AWS_S3_BUCKET=your-bucket-name
 
 ## Usage
 
-The system provides four main commands:
+The system can be used in two ways: **Web UI (Recommended)** or **Command Line Interface**
+
+### 🌐 Web UI (Recommended for Beginners)
+
+The easiest way to use the system is through the web-based user interface:
+
+#### Starting the Web UI
+
+```bash
+streamlit run app.py
+```
+
+The application will open in your browser at `http://localhost:8501`
+
+#### Web UI Features
+
+The web interface provides six main pages:
+
+1. **🏠 Home**: Dashboard with quick stats and getting started guide
+2. **📤 Upload Images**:
+   - Upload CSV files with image URLs
+   - Select OCR engine
+   - Monitor upload progress in real-time
+   - View filtered and uploaded images
+
+3. **🔍 Search Images**:
+   - Search by text query, tags, or categories
+   - Browse all images in a gallery view
+   - View detailed metadata for each image
+   - Export search results as JSON or CSV
+
+4. **📝 Process SEO Posts**:
+   - Upload single post files (TXT, HTML, MD)
+   - Batch process multiple posts via ZIP upload
+   - Select number of images to insert
+   - Download enhanced posts
+
+5. **📊 Statistics**:
+   - View comprehensive analytics
+   - Category and tag distribution charts
+   - Usage statistics and trends
+   - Recent activity monitoring
+
+6. **⚙️ Settings**:
+   - Configure AWS credentials via UI
+   - Test S3 connection
+   - View system information
+   - Manage storage and maintenance
+
+#### Web UI Advantages
+
+- ✅ No command line knowledge required
+- ✅ Visual feedback and progress indicators
+- ✅ Interactive image gallery
+- ✅ Easy file uploads and downloads
+- ✅ Real-time statistics and charts
+- ✅ Configure settings through forms
+
+### 💻 Command Line Interface
+
+The system provides four main CLI commands:
 
 ### 1. Upload Images from CSV
 
@@ -242,7 +309,8 @@ The system uses OpenAI's CLIP model to understand image content:
 
 ```
 teoteo/
-├── main.py                 # Main entry point
+├── app.py                  # Streamlit web UI entry point
+├── main.py                 # CLI entry point
 ├── config.py              # Configuration management
 ├── image_downloader.py    # Download images from URLs
 ├── image_filter.py        # OCR filtering for phone/website
@@ -250,11 +318,21 @@ teoteo/
 ├── aws_uploader.py        # AWS S3 integration
 ├── metadata_manager.py    # Metadata storage and retrieval
 ├── seo_post_manager.py    # SEO post processing
+├── pages/                 # Web UI pages
+│   ├── __init__.py
+│   ├── home.py           # Home dashboard
+│   ├── upload.py         # Image upload interface
+│   ├── search.py         # Image search and gallery
+│   ├── process_posts.py  # SEO post processing
+│   ├── statistics.py     # Analytics dashboard
+│   └── settings.py       # Configuration settings
 ├── requirements.txt       # Python dependencies
 ├── .env.example          # Environment template
 ├── .gitignore           # Git ignore rules
+├── LICENSE              # MIT License
 ├── README.md            # This file
-└── example_urls.csv     # Example CSV file
+├── example_urls.csv     # Example CSV file
+└── example_post.txt     # Example SEO post
 ```
 
 ## Examples
