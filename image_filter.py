@@ -1,9 +1,15 @@
 import re
 import logging
 from PIL import Image
-import easyocr
 import pytesseract
 from config import Config
+
+# Try to import easyocr, but make it optional
+try:
+    import easyocr
+    EASYOCR_AVAILABLE = True
+except ImportError:
+    EASYOCR_AVAILABLE = False
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -13,11 +19,18 @@ class ImageFilter:
     """Filter images containing phone numbers or websites using OCR"""
 
     def __init__(self, ocr_engine='easyocr'):
+        # Default to tesseract if easyocr requested but not available
+        if ocr_engine == 'easyocr' and not EASYOCR_AVAILABLE:
+            logger.warning("EasyOCR not available. Falling back to Tesseract.")
+            ocr_engine = 'tesseract'
+
         self.ocr_engine = ocr_engine
 
-        if ocr_engine == 'easyocr':
+        if ocr_engine == 'easyocr' and EASYOCR_AVAILABLE:
             logger.info("Initializing EasyOCR...")
             self.reader = easyocr.Reader(Config.OCR_LANGUAGES, gpu=False)
+        else:
+            self.reader = None
 
         self.phone_patterns = [re.compile(pattern) for pattern in Config.PHONE_PATTERNS]
         self.website_patterns = [re.compile(pattern, re.IGNORECASE) for pattern in Config.WEBSITE_PATTERNS]

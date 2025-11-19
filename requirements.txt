@@ -1,17 +1,28 @@
-boto3==1.34.14
-Pillow==10.2.0
-pytesseract==0.3.10
-easyocr==1.7.1
-opencv-python==4.9.0.80
-requests==2.31.0
-pandas==2.2.0
-python-dotenv==1.0.1
-torch==2.2.0
-torchvision==0.17.0
-transformers==4.37.2
-nltk==3.8.1
-scikit-learn==1.4.0
-numpy==1.26.3
-streamlit==1.31.0
-plotly==5.18.0
-beautifulsoup4==4.12.3
+# Core dependencies (required)
+boto3>=1.34.0
+Pillow>=10.3.0
+requests>=2.31.0
+pandas>=2.0.0
+python-dotenv>=1.0.0
+streamlit>=1.31.0
+plotly>=5.18.0
+beautifulsoup4>=4.12.0
+numpy>=1.24.0
+
+# Lightweight OCR (works on Streamlit Cloud)
+pytesseract>=0.3.10
+
+# Note: Heavy ML dependencies (torch, transformers, easyocr) are commented out
+# for Streamlit Cloud deployment due to 1GB RAM limit.
+#
+# For full ML features (image recognition and advanced filtering):
+# - Deploy to AWS EC2, Heroku, or local server
+# - Or uncomment below if you have Streamlit Cloud Teams (more resources)
+#
+# torch>=2.3.0
+# torchvision>=0.18.0
+# transformers>=4.40.0
+# easyocr>=1.7.0
+# opencv-python-headless>=4.9.0
+# nltk>=3.8.0
+# scikit-learn>=1.4.0

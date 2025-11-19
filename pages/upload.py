@@ -8,9 +8,32 @@ from image_recognizer import ImageRecognizer
 from aws_uploader import AWSUploader
 from metadata_manager import MetadataManager
 
+# Check which features are available
+try:
+    import easyocr
+    EASYOCR_AVAILABLE = True
+except:
+    EASYOCR_AVAILABLE = False
+
+try:
+    import torch
+    ML_AVAILABLE = True
+except:
+    ML_AVAILABLE = False
+
 def show():
     st.markdown('<div class="main-header">📤 Upload Images</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Download, filter, and upload images from CSV</div>', unsafe_allow_html=True)
+
+    # Show system mode info
+    if not ML_AVAILABLE or not EASYOCR_AVAILABLE:
+        mode_msg = "Running in **Lightweight Mode** "
+        if not ML_AVAILABLE:
+            mode_msg += "(AI image recognition disabled) "
+        if not EASYOCR_AVAILABLE:
+            mode_msg += "(EasyOCR unavailable, using Tesseract) "
+        mode_msg += "• Suitable for Streamlit Cloud free tier • For full features, deploy to dedicated server"
+        st.info(mode_msg)
 
     # Check AWS configuration
     if not Config.AWS_ACCESS_KEY_ID or not Config.AWS_SECRET_ACCESS_KEY:
@@ -58,9 +81,13 @@ def show():
     # OCR engine selection
     col1, col2 = st.columns(2)
     with col1:
+        ocr_options = ['tesseract']
+        if EASYOCR_AVAILABLE:
+            ocr_options.insert(0, 'easyocr')
+
         ocr_engine = st.selectbox(
             "OCR Engine",
-            options=['easyocr', 'tesseract'],
+            options=ocr_options,
             help="EasyOCR is more accurate but slower. Tesseract is faster but may miss some text."
         )
 
@@ -69,7 +96,7 @@ def show():
         if ocr_engine == 'easyocr':
             st.caption("✅ More accurate text detection")
         else:
-            st.caption("⚡ Faster processing")
+            st.caption("⚡ Faster processing" + (" (only option available)" if not EASYOCR_AVAILABLE else ""))
 
     st.markdown("---")
 
